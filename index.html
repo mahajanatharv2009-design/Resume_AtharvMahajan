@@ -185,22 +185,34 @@
             <span class="tag">File org & cloud storage</span>
           </div>
         </div>
-        <div class="panel">
-          <div class="section-title"><h2>Education</h2></div>
-          <div class="timeline">
-            <div class="item">
-              <div class="dot"></div>
-              <div>
-                <h3>Iroquois Ridge High School — Grade 11</h3>
-                <div class="meta">Oakville, ON • 2025–2026</div>
-                <p class="sub">Computer Science, Math, and Tech-focused coursework.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="panel">
+  <div class="section-title"><h2>Education</h2></div>
+  <div class="timeline">
+    <div class="item">
+      <div class="dot"></div>
+      <div>
+        <h3>Iroquois Ridge High School — Grade 11</h3>
+        <div class="meta">Oakville, ON • 2025–2026</div>
+        <p class="sub">Computer Science, Math, and Tech-focused coursework.</p>
       </div>
-    </section>
+    </div>
+  </div>
 
+  <div class="section-title" style="margin-top:18px;"><h2>Certifications</h2></div>
+  <div class="timeline">
+    <div class="item">
+      <div class="dot"></div>
+      <div>
+        <h3>LinkedIn Learning Certificates</h3>
+        <div class="meta">2024–2025</div>
+        <p class="sub">Completed courses in web design, HTML, CSS, and JavaScript to build foundational skills for website development and maintenance.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    </section>
+ VBNHGFCDX
     <!-- Projects -->
     <section id="projects">
       <div class="section-title">
@@ -336,10 +348,10 @@
       <p class="sub">Captured event moments, practiced visual storytelling, and edited photos for school and community media.</p>
     </div>
 
-    <div class="panel">
+    <!-- <div class="panel">
       <h3>South Asian Heritage Club</h3>
       <p class="sub">Helped organize multicultural events and managed sales counters during school functions.</p>
-    </div>
+    </div> -->
 
     <div class="panel">
       <h3>VEX V5 Robotics Team</h3>
@@ -360,64 +372,54 @@
 </section>
 
 
-    <!-- Contact -->
-    <section id="contact" class="panel">
-      <div class="section-title"><h2>Get in Touch</h2></div>
-      <div class="cols-2">
-        <div>
-          <p>If you have an internship, volunteer opportunity, or a cool project I can help with, I’d love to hear from you.</p>
-          <p><strong>Email:</strong> <a href="mailto:mahajanatharv2009@gmail.com">mahajanatharv2009@gmail.com</a><br/>
-        </div>
-        <form id="msgForm" onsubmit="return false" aria-label="Contact form (demo)">
-          <div class="cols-2" style="gap:10px">
-            <input class="search" placeholder="Your name" required>
-            <input class="search" placeholder="Email (for reply)" type="email" required>
-          </div>
-          <div style="margin-top:10px">
-            <textarea class="search" placeholder="Your message" rows="4" required></textarea>
-          </div>
-          <div style="display:flex; justify-content:flex-end; margin-top:10px">
-            <button class="btn" onclick="fakeSend()">Send</button>
-          </div>
-          <p id="sent" class="sub" style="display:none; margin-top:8px">Thanks! for your Inquary</p>
-        </form>
-      </div>
-    </section>
+<!-- Contact -->
+<section id="contact" class="panel">
+  <div class="section-title"><h2>Contact</h2></div>
+  <div>
+    <p>If you have an internship, volunteer opportunity, or a cool project I can help with, I’d love to hear from you.</p>
+    <p><strong>Email:</strong> <a href="mailto:mahajanatharv2009@gmail.com">mahajanatharv2009@gmail.com</a></p>
+    <p><strong>Phone:</strong> <a href="tel Canada: 2898856095 ">(123) 456-7890</a></p>
+  </div>
+</section>
 
-    <footer>
-      <p>© <span id="year"></span> Atharv Mahajan. Built with HTML, CSS, and JavaScript.</p>
-    </footer>
-  </main>
+<footer>
+  <p>© <span id="year"></span> Atharv Mahajan. Built with HTML, CSS, and JavaScript.</p>
+</footer>
+</main>
 
-  <script>
-    // -------- Theme toggle with localStorage --------
-    const root = document.documentElement;
-    const savedTheme = localStorage.getItem('theme');
-    if(savedTheme){ root.setAttribute('data-theme', savedTheme); }
-    document.getElementById('themeToggle').addEventListener('click',()=>{
-      const t = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      if(t==='dark'){ root.removeAttribute('data-theme'); localStorage.setItem('theme','dark'); }
-      else { root.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); }
-    });
+<script>
+  // -------- Theme toggle with localStorage --------
+  const root = document.documentElement;
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    root.setAttribute('data-theme', savedTheme);
+  }
 
-    // -------- Projects search filter --------
-    const search = document.getElementById('projectSearch');
-    const cards = Array.from(document.querySelectorAll('#projectGrid .project'));
-    search.addEventListener('input', (e)=>{
-      const q = e.target.value.toLowerCase().trim();
-      cards.forEach(card=>{
-        const text = (card.innerText + ' ' + (card.dataset.tags || '')).toLowerCase();
-        card.style.display = text.includes(q) ? '' : 'none';
-      })
-    });
-
-    // -------- Contact demo --------
-    function fakeSend(){
-      document.getElementById('sent').style.display='block';
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const t = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    if (t === 'dark') {
+      root.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      root.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
     }
+  });
 
-    // -------- Year --------
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  // -------- Projects search filter --------
+  const search = document.getElementById('projectSearch');
+  const cards = Array.from(document.querySelectorAll('#projectGrid .project'));
+
+  search.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    cards.forEach(card => {
+      const text = (card.innerText + ' ' + (card.dataset.tags || '')).toLowerCase();
+      card.style.display = text.includes(q) ? '' : 'none';
+    });
+  });
+
+  // -------- Year --------
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
