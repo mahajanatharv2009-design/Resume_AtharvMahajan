@@ -1,0 +1,1 @@
+window.GITHUB_PROJECTS = [];
