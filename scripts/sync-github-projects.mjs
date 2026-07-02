@@ -1,7 +1,3 @@
-// GitHub Project Sync Script for Atharv Mahajan's Pixel Portfolio
-// This script checks selected GitHub profiles, reads repo READMEs,
-// and writes approved projects into generated-projects.js.
-
 const owners = unique(
   String(process.env.GITHUB_OWNERS || process.env.GITHUB_OWNER || "Atharvamaj,mahajanatharv2009-design")
     .split(/[\s,]+/)
@@ -13,7 +9,7 @@ const token = process.env.GITHUB_TOKEN || "";
 
 const headers = {
   "Accept": "application/vnd.github+json",
-  "User-Agent": "atharv-portfolio-project-sync"
+  "User-Agent": "portfolio-project-sync"
 };
 
 if (token) headers.Authorization = `Bearer ${token}`;
@@ -28,6 +24,7 @@ const builtInTitles = new Set([
 ].map(normalize));
 
 const current = await readCurrentProjects();
+const projects = [...current];
 
 const seenTitles = new Set([
   ...builtInTitles,
@@ -37,8 +34,6 @@ const seenTitles = new Set([
 const seenUrls = new Set(
   current.map(project => normalize(project.url)).filter(Boolean)
 );
-
-const projects = [...current];
 
 for (const owner of owners) {
   const repos = await getJson(
@@ -59,16 +54,26 @@ for (const owner of owners) {
     const titleKey = normalize(info.title || repo.name);
     const urlKey = normalize(repo.html_url);
 
-    if (!titleKey || seenTitles.has(titleKey) || seenUrls.has(urlKey)) continue;
+    if (!titleKey) continue;
+
+    const existingIndex = projects.findIndex(project =>
+      normalize(project.url) === normalize(repo.html_url)
+    );
+
+    if (existingIndex < 0 && (seenTitles.has(titleKey) || seenUrls.has(urlKey))) {
+      continue;
+    }
 
     seenTitles.add(titleKey);
     seenUrls.add(urlKey);
 
-    // Atharv Mahajan: only use a website/demo link if it is set in the GitHub repo Website field.
-    // Do not guess GitHub Pages links because not every repo is a website.
+    // Website/demo link:
+    // Built for Atharv Mahajan's portfolio.
+    // Only use the GitHub repo Website field.
+    // Do NOT guess GitHub Pages links because not every repo is a website.
     const website = cleanUrl(repo.homepage);
 
-    projects.push({
+    const projectData = {
       title: info.title,
       description: info.description,
       repo: repo.name,
@@ -77,7 +82,16 @@ for (const owner of owners) {
       homepage: website,
       website,
       updatedAt: repo.updated_at
-    });
+    };
+
+    if (existingIndex >= 0) {
+      projects[existingIndex] = {
+        ...projects[existingIndex],
+        ...projectData
+      };
+    } else {
+      projects.push(projectData);
+    }
   }
 }
 
