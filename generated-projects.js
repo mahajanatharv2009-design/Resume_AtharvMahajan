@@ -1,5 +1,35 @@
 window.GITHUB_PROJECTS = [
   {
+    "title": "Happy New Year Prank Card",
+    "description": "A simple New Year's greeting card that ends with a classic Rick Roll.",
+    "repo": "happy-new-year",
+    "owner": "Atharvamaj",
+    "url": "https://github.com/Atharvamaj/happy-new-year",
+    "homepage": "https://atharvamaj.github.io/happy-new-year/",
+    "website": "https://atharvamaj.github.io/happy-new-year/",
+    "updatedAt": "2026-07-03T15:21:10Z"
+  },
+  {
+    "title": "Bday Card",
+    "description": "Check out who I wished a Happy Birthday to last!!!",
+    "repo": "Bday-card",
+    "owner": "mahajanatharv2009-design",
+    "url": "https://github.com/mahajanatharv2009-design/Bday-card",
+    "homepage": "https://mahajanatharv2009-design.github.io/Bday-card/",
+    "website": "https://mahajanatharv2009-design.github.io/Bday-card/",
+    "updatedAt": "2026-07-03T14:27:00Z"
+  },
+  {
+    "title": "Resume AtharvMahajan",
+    "description": "https://mahajanatharv2009-design.github.io/ResumeAtharvMahajan/ link to portfolio",
+    "repo": "Resume_AtharvMahajan",
+    "owner": "mahajanatharv2009-design",
+    "url": "https://github.com/mahajanatharv2009-design/Resume_AtharvMahajan",
+    "homepage": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
+    "website": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
+    "updatedAt": "2026-07-03T14:19:28Z"
+  },
+  {
     "title": "time helper",
     "description": "A vertule pet with timer that helps you to manage time",
     "repo": "timy-wimey",
@@ -8,16 +38,6 @@ window.GITHUB_PROJECTS = [
     "homepage": "",
     "website": "",
     "updatedAt": "2026-05-07T16:56:10Z"
-  },
-  {
-    "title": "happy-new-year",
-    "description": "happy new year prank card.",
-    "repo": "happy-new-year",
-    "owner": "Atharvamaj",
-    "url": "https://github.com/Atharvamaj/happy-new-year",
-    "homepage": "",
-    "website": "",
-    "updatedAt": "2026-01-01T03:52:56Z"
   },
   {
     "title": "VOCA",
