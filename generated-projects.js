@@ -1,5 +1,15 @@
 window.GITHUB_PROJECTS = [
   {
+    "title": "Resume AtharvMahajan",
+    "description": "https://mahajanatharv2009-design.github.io/ResumeAtharvMahajan/ link to portfolio",
+    "repo": "Resume_AtharvMahajan",
+    "owner": "mahajanatharv2009-design",
+    "url": "https://github.com/mahajanatharv2009-design/Resume_AtharvMahajan",
+    "homepage": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
+    "website": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
+    "updatedAt": "2026-07-04T07:39:00Z"
+  },
+  {
     "title": "Happy New Year Prank Card",
     "description": "A simple New Year's greeting card that ends with a classic Rick Roll.",
     "repo": "happy-new-year",
@@ -18,16 +28,6 @@ window.GITHUB_PROJECTS = [
     "homepage": "https://mahajanatharv2009-design.github.io/Bday-card/",
     "website": "https://mahajanatharv2009-design.github.io/Bday-card/",
     "updatedAt": "2026-07-03T14:27:00Z"
-  },
-  {
-    "title": "Resume AtharvMahajan",
-    "description": "https://mahajanatharv2009-design.github.io/ResumeAtharvMahajan/ link to portfolio",
-    "repo": "Resume_AtharvMahajan",
-    "owner": "mahajanatharv2009-design",
-    "url": "https://github.com/mahajanatharv2009-design/Resume_AtharvMahajan",
-    "homepage": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
-    "website": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
-    "updatedAt": "2026-07-03T14:19:28Z"
   },
   {
     "title": "time helper",
