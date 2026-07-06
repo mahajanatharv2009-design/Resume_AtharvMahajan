@@ -1,15 +1,24 @@
 name: Sync GitHub Projects
 
 on:
-  schedule:
-    - cron: "0 5 * * *"
   workflow_dispatch:
+    inputs:
+      bot_action:
+        description: "Choose what the GitHub project bot should do"
+        required: true
+        default: "sync_once"
+        type: choice
+        options:
+          - sync_once
+          - stop_bot
+          - start_bot
+          - status_only
 
 permissions:
   contents: write
 
 jobs:
-  sync-projects:
+  github-project-bot:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -20,14 +29,28 @@ jobs:
         with:
           node-version: 20
 
-      - name: Update generated projects
+      - name: Stop bot manually
+        if: ${{ github.event.inputs.bot_action == 'stop_bot' }}
+        run: node scripts/set-github-bot-status.mjs stop
+
+      - name: Start bot manually
+        if: ${{ github.event.inputs.bot_action == 'start_bot' }}
+        run: node scripts/set-github-bot-status.mjs start
+
+      - name: Show bot status
+        if: ${{ github.event.inputs.bot_action == 'status_only' }}
+        run: node scripts/set-github-bot-status.mjs status
+
+      - name: Sync GitHub projects once
+        if: ${{ github.event.inputs.bot_action == 'sync_once' }}
         env:
           GITHUB_OWNERS: Atharvamaj,mahajanatharv2009-design
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/sync-github-projects.mjs
 
-      - name: Commit changes
+      - name: Commit bot status or project changes
+        if: ${{ github.event.inputs.bot_action != 'status_only' }}
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Update portfolio projects from GitHub
-          file_pattern: generated-projects.js
+          commit_message: GitHub project bot manual update
+          file_pattern: generated-projects.js portfolio-bot-instructions.json

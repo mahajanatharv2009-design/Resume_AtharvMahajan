@@ -1,0 +1,29 @@
+{
+  "enabled": false,
+  "owners": [
+    "Atharvamaj",
+    "mahajanatharv2009-design"
+  ],
+  "titleSource": "readme-heading-first",
+  "descriptionSource": "readme-first-paragraph",
+  "duplicateRules": {
+    "matchByRepoUrl": true,
+    "matchByRepoFullName": true,
+    "matchByTitle": true,
+    "matchByAliases": true
+  },
+  "excludeRepos": [
+    "Atharvamaj/README",
+    "mahajanatharv2009-design/README"
+  ],
+  "includeOnlyRepos": [],
+  "repoAliases": {},
+  "titleOverrides": {},
+  "descriptionOverrides": {},
+  "manualControl": "Use GitHub Actions > Sync GitHub Projects > Run workflow > bot_action: stop_bot/start_bot/sync_once/status_only",
+  "lastManualAction": "stop_bot",
+  "defaultCategory": "GitHub",
+  "categoryOverrides": {},
+  "websiteOverrides": {},
+  "pinOverrides": {}
+}
