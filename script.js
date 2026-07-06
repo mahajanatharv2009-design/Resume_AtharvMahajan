@@ -346,20 +346,108 @@ if (board) {
   setTimeout(playBoardSequence, 350);
 }
 
-const filterButtons = document.querySelectorAll(".filter-btn");
+const projectControls = document.querySelector(".project-controls");
+
+function getFilterButtons() {
+  return Array.from(document.querySelectorAll(".filter-btn"));
+}
+
+function setSeeAllLabel() {
+  getFilterButtons()
+    .filter(button => button.dataset.filter === "all")
+    .forEach(button => { button.textContent = "See All"; });
+}
+
+function cleanCategoryLabel(value) {
+  return String(value || "GitHub").replace(/\s+/g, " ").trim().slice(0, 32) || "GitHub";
+}
+
+function cleanPin(value) {
+  const pin = Number(String(value || "").match(/[1-4]/)?.[0] || 0);
+  return pin >= 1 && pin <= 4 ? pin : null;
+}
+
+function ensureProjectFilter(category) {
+  if (!projectControls) return;
+
+  const label = cleanCategoryLabel(category);
+  if (!label || label === "all") return;
+
+  const exists = getFilterButtons().some(button => normalizeProjectName(button.dataset.filter) === normalizeProjectName(label));
+  if (exists) return;
+
+  const button = document.createElement("button");
+  button.className = "filter-btn";
+  button.dataset.filter = label;
+  button.type = "button";
+  button.textContent = label;
+  projectControls.appendChild(button);
+}
+
+function applyProjectPins() {
+  const holder = document.getElementById("projectGrid");
+  if (!holder) return;
+
+  const cards = Array.from(holder.querySelectorAll(":scope > .project-card"));
+  const pinnedBySpot = new Map();
+
+  cards.forEach(card => {
+    const title = normalizeProjectName(card.querySelector("h3")?.textContent || "");
+    if (title === "solvexchange website" && !cleanPin(card.dataset.pin)) {
+      card.dataset.pin = "1";
+      card.classList.add("pinned-card");
+    }
+
+    card.dataset.pinReplaced = "";
+    const pin = cleanPin(card.dataset.pin);
+
+    if (pin) {
+      card.dataset.pin = String(pin);
+      card.classList.add("pinned-card");
+
+      const previous = pinnedBySpot.get(pin);
+      if (previous) previous.dataset.pinReplaced = "true";
+      pinnedBySpot.set(pin, card);
+    }
+  });
+
+  const originalOrder = new Map(cards.map((card, index) => [card, index]));
+
+  cards
+    .sort((a, b) => {
+      const pinA = a.dataset.pinReplaced === "true" ? 999 : cleanPin(a.dataset.pin) || 999;
+      const pinB = b.dataset.pinReplaced === "true" ? 999 : cleanPin(b.dataset.pin) || 999;
+
+      if (pinA !== pinB) return pinA - pinB;
+
+      return originalOrder.get(a) - originalOrder.get(b);
+    })
+    .forEach(card => holder.appendChild(card));
+}
+
 function applyProjectFilter(selected = "all") {
   document.querySelectorAll(".project-card[data-category]").forEach(card => {
     const show = selected === "all" || card.dataset.category === selected;
-    card.classList.toggle("is-hidden", !show);
+    const replaced = card.dataset.pinReplaced === "true";
+    card.classList.toggle("is-hidden", !show || replaced);
   });
 }
-filterButtons.forEach(button => {
-  button.addEventListener("click", () => {
+
+if (projectControls) {
+  setSeeAllLabel();
+
+  projectControls.addEventListener("click", event => {
+    const button = event.target.closest(".filter-btn");
+    if (!button) return;
+
     const selected = button.dataset.filter;
-    filterButtons.forEach(btn => btn.classList.toggle("active", btn === button));
+    getFilterButtons().forEach(btn => btn.classList.toggle("active", btn === button));
     applyProjectFilter(selected);
   });
-});
+}
+
+applyProjectPins();
+applyProjectFilter(document.querySelector(".filter-btn.active")?.dataset.filter || "all");
 
 const revealItems = document.querySelectorAll(".section-card, .project-card, .timeline article, .club-grid > div, .contact");
 if ("IntersectionObserver" in window) {
@@ -646,6 +734,7 @@ document.addEventListener("keydown", event => {
 (function renderGithubProjects() {
   const holder = document.getElementById("projectGrid");
   if (!holder) return;
+
   const projects = Array.isArray(window.GITHUB_PROJECTS) ? window.GITHUB_PROJECTS : [];
   if (!projects.length) return;
 
@@ -654,24 +743,48 @@ document.addEventListener("keydown", event => {
       .map(el => normalizeProjectName(el.textContent))
   );
 
-  const clean = projects.filter(project => {
-    const key = normalizeProjectName(project.title || project.repo || "");
-    return key && !existing.has(key);
-  });
+  const clean = projects
+    .filter(project => {
+      const key = normalizeProjectName(project.title || project.repo || "");
+      return key && !existing.has(key);
+    })
+    .sort((a, b) => {
+      const pinA = cleanPin(a.pin) || 999;
+      const pinB = cleanPin(b.pin) || 999;
+
+      if (pinA !== pinB) return pinA - pinB;
+
+      return String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""));
+    });
 
   if (!clean.length) return;
+
   holder.insertAdjacentHTML("beforeend", clean.map(project => {
     const title = escapeHtml(project.title || project.repo || "GitHub Project");
     const desc = escapeHtml(project.description || "Updated from GitHub README.");
-    const repo = escapeHtml(project.repo || "GitHub Repo");
+    const category = cleanCategoryLabel(project.category || "GitHub");
+    const pin = cleanPin(project.pin);
     const url = escapeHtml(project.url || "#");
-    return `<article class="project-card github-card" data-category="GitHub">
-      <div class="project-tag">GitHub</div>
+    const website = escapeHtml(project.website || project.homepage || "");
+    const links = [];
+
+    ensureProjectFilter(category);
+
+    if (website) {
+      links.push(`<a class="visit-link" href="${website}" target="_blank" rel="noopener">Visit Website</a>`);
+    }
+
+    links.push(`<a class="repo-link" href="${url}" target="_blank" rel="noopener">View Repo</a>`);
+
+    return `<article class="project-card github-card${pin ? " pinned-card" : ""}" data-category="${escapeHtml(category)}"${pin ? ` data-pin="${pin}"` : ""}>
+      <div class="project-tag">${escapeHtml(category)}</div>
       <h3>${title}</h3>
       <p>${desc}</p>
-      <p class="links"><a href="${url}" target="_blank" rel="noopener">View Repo: ${repo}</a></p>
+      <p class="links">${links.join("")}</p>
     </article>`;
   }).join(""));
+
+  applyProjectPins();
 
   const active = document.querySelector(".filter-btn.active")?.dataset.filter || "all";
   applyProjectFilter(active);
