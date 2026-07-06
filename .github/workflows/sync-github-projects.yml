@@ -12,6 +12,7 @@ on:
           - sync_once
           - stop_bot
           - start_bot
+          - reset_projects
           - status_only
 
 permissions:
@@ -36,6 +37,10 @@ jobs:
       - name: Start bot manually
         if: ${{ github.event.inputs.bot_action == 'start_bot' }}
         run: node scripts/set-github-bot-status.mjs start
+
+      - name: Reset generated projects
+        if: ${{ github.event.inputs.bot_action == 'reset_projects' }}
+        run: node scripts/set-github-bot-status.mjs reset
 
       - name: Show bot status
         if: ${{ github.event.inputs.bot_action == 'status_only' }}

@@ -20,7 +20,7 @@
   "repoAliases": {},
   "titleOverrides": {},
   "descriptionOverrides": {},
-  "manualControl": "Use GitHub Actions > Sync GitHub Projects > Run workflow > bot_action: stop_bot/start_bot/sync_once/status_only",
+  "manualControl": "Use GitHub Actions > Sync GitHub Projects > Run workflow > bot_action: stop_bot/start_bot/sync_once/reset_projects/status_only",
   "lastManualAction": "stop_bot",
   "defaultCategory": "GitHub",
   "categoryOverrides": {},
