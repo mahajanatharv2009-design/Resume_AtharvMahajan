@@ -7,7 +7,7 @@ window.GITHUB_PROJECTS = [
     "url": "https://github.com/mahajanatharv2009-design/Resume_AtharvMahajan",
     "homepage": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
     "website": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
-    "updatedAt": "2026-07-04T07:39:00Z"
+    "updatedAt": "2026-07-05T07:52:48Z"
   },
   {
     "title": "Happy New Year Prank Card",
