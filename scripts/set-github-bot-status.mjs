@@ -22,6 +22,16 @@ if (action === "stop") {
   process.exit(0);
 }
 
+
+if (action === "reset") {
+  instructions.lastManualAction = "reset_projects";
+  instructions.lastManualActionAt = new Date().toISOString();
+  await fs.writeFile(instructionFile, `${JSON.stringify(instructions, null, 2)}\n`);
+  await fs.writeFile("generated-projects.js", "window.GITHUB_PROJECTS = [];\n");
+  console.log("Generated GitHub project cards have been reset. Hardcoded project cards are unchanged.");
+  process.exit(0);
+}
+
 if (action === "start") {
   instructions.enabled = true;
   instructions.lastManualAction = "start_bot";

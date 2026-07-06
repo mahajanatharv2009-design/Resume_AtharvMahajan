@@ -629,9 +629,9 @@ main {
 
 .project-card.is-hidden { display: none; }
 .project-card[data-pin-replaced="true"] { display: none !important; }
-.project-card.pinned-card {
-  border-color: var(--line-strong);
-}
+.project-card.pinned-card { border-color: var(--line-strong); }
+.featured-projects-section .section-heading { margin-bottom: 18px; }
+.featured-project-grid .project-card { min-height: 240px; }
 .project-card .links {
   margin-top: auto;
   padding-top: 12px;
