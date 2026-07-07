@@ -23,12 +23,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Stop bot manually
         if: ${{ github.event.inputs.bot_action == 'stop_bot' }}
@@ -55,7 +55,7 @@ jobs:
 
       - name: Commit bot status or project changes
         if: ${{ github.event.inputs.bot_action != 'status_only' }}
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: GitHub project bot manual update
           file_pattern: generated-projects.js portfolio-bot-instructions.json
