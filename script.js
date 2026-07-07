@@ -352,10 +352,11 @@ function getFilterButtons() {
   return Array.from(document.querySelectorAll(".filter-btn"));
 }
 
-function setSeeAllLabel() {
-  getFilterButtons()
-    .filter(button => button.dataset.filter === "all")
-    .forEach(button => { button.textContent = "See All"; });
+function setProjectFilterLabels() {
+  getFilterButtons().forEach(button => {
+    if (button.dataset.filter === "all") button.textContent = "See All";
+    if (button.dataset.filter === "Featured") button.textContent = "Featured";
+  });
 }
 
 function cleanCategoryLabel(value) {
@@ -371,7 +372,7 @@ function ensureProjectFilter(category) {
   if (!projectControls) return;
 
   const label = cleanCategoryLabel(category);
-  if (!label || label === "all") return;
+  if (!label || normalizeProjectName(label) === "all" || normalizeProjectName(label) === "featured") return;
 
   const exists = getFilterButtons().some(button => normalizeProjectName(button.dataset.filter) === normalizeProjectName(label));
   if (exists) return;
@@ -426,41 +427,57 @@ function applyProjectPins() {
 
       if (pinA !== pinB) return pinA - pinB;
 
+      const updatedA = a.dataset.updatedAt || "";
+      const updatedB = b.dataset.updatedAt || "";
+
+      if (updatedA || updatedB) return updatedB.localeCompare(updatedA);
+
       return originalOrder.get(a) - originalOrder.get(b);
     })
     .forEach(card => holder.appendChild(card));
+
+  applyFeaturedProjects();
 }
 
-function applyProjectFilter(selected = "all") {
+function applyFeaturedProjects() {
+  const holder = document.getElementById("projectGrid");
+  if (!holder) return;
+
+  const cards = Array.from(holder.querySelectorAll(":scope > .project-card"));
+
+  cards.forEach(card => {
+    card.dataset.featured = "false";
+  });
+
+  cards
+    .filter(card => card.dataset.pinReplaced !== "true")
+    .slice(0, 6)
+    .forEach(card => {
+      card.dataset.featured = "true";
+    });
+}
+
+function applyProjectFilter(selected = "Featured") {
+  applyProjectPins();
+
   document.querySelectorAll(".project-card[data-category]").forEach(card => {
-    const show = selected === "all" || card.dataset.category === selected;
     const replaced = card.dataset.pinReplaced === "true";
+    let show = false;
+
+    if (selected === "Featured") {
+      show = card.dataset.featured === "true";
+    } else if (selected === "all") {
+      show = true;
+    } else {
+      show = card.dataset.category === selected;
+    }
+
     card.classList.toggle("is-hidden", !show || replaced);
   });
 }
 
-function renderFeaturedProjects() {
-  const source = document.getElementById("projectGrid");
-  const target = document.getElementById("featuredProjectGrid");
-  if (!source || !target) return;
-
-  const cards = Array.from(source.querySelectorAll(":scope > .project-card"))
-    .filter(card => card.dataset.pinReplaced !== "true")
-    .slice(0, 6);
-
-  target.innerHTML = "";
-
-  cards.forEach(card => {
-    const clone = card.cloneNode(true);
-    clone.classList.remove("is-hidden", "is-tilting");
-    clone.classList.add("featured-card");
-    clone.removeAttribute("style");
-    target.appendChild(clone);
-  });
-}
-
 if (projectControls) {
-  setSeeAllLabel();
+  setProjectFilterLabels();
 
   projectControls.addEventListener("click", event => {
     const button = event.target.closest(".filter-btn");
@@ -472,9 +489,7 @@ if (projectControls) {
   });
 }
 
-applyProjectPins();
-renderFeaturedProjects();
-applyProjectFilter(document.querySelector(".filter-btn.active")?.dataset.filter || "all");
+applyProjectFilter(document.querySelector(".filter-btn.active")?.dataset.filter || "Featured");
 
 const revealItems = document.querySelectorAll(".section-card, .project-card, .timeline article, .club-grid > div, .contact");
 if ("IntersectionObserver" in window) {
@@ -784,9 +799,7 @@ document.addEventListener("keydown", event => {
 
   const projects = Array.isArray(window.GITHUB_PROJECTS) ? window.GITHUB_PROJECTS : [];
   if (!projects.length) {
-    applyProjectPins();
-    renderFeaturedProjects();
-    applyProjectFilter(document.querySelector(".filter-btn.active")?.dataset.filter || "all");
+    applyProjectFilter(document.querySelector(".filter-btn.active")?.dataset.filter || "Featured");
     return;
   }
 
@@ -827,7 +840,7 @@ document.addEventListener("keydown", event => {
 
       links.push(`<a class="repo-link" href="${url}" target="_blank" rel="noopener">View Repo</a>`);
 
-      return `<article class="project-card github-card${pin ? " pinned-card" : ""}" data-category="${escapeHtml(category)}"${pin ? ` data-pin="${pin}"` : ""}>
+      return `<article class="project-card github-card${pin ? " pinned-card" : ""}" data-category="${escapeHtml(category)}" data-updated-at="${escapeHtml(project.updatedAt || "")}"${pin ? ` data-pin="${pin}"` : ""}>
         <div class="project-tag">${escapeHtml(category)}</div>
         <h3>${title}</h3>
         <p>${desc}</p>
@@ -836,10 +849,7 @@ document.addEventListener("keydown", event => {
     }).join(""));
   }
 
-  applyProjectPins();
-  renderFeaturedProjects();
-
-  const active = document.querySelector(".filter-btn.active")?.dataset.filter || "all";
+  const active = document.querySelector(".filter-btn.active")?.dataset.filter || "Featured";
   applyProjectFilter(active);
 })();
 
