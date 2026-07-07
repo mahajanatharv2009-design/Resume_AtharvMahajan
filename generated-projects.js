@@ -1,5 +1,17 @@
 window.GITHUB_PROJECTS = [
   {
+    "title": "Happy New Year Prank Card",
+    "description": "This is a simple webpage that looks like a New Year's greeting. When opened, it preloads a hidden Rick Astley video.",
+    "category": "Web",
+    "pin": null,
+    "repo": "happy-new-year",
+    "owner": "Atharvamaj",
+    "url": "https://github.com/Atharvamaj/happy-new-year",
+    "homepage": "https://atharvamaj.github.io/happy-new-year/",
+    "website": "https://atharvamaj.github.io/happy-new-year/",
+    "updatedAt": "2026-07-07T00:52:15Z"
+  },
+  {
     "title": "Resume AtharvMahajan",
     "description": "https://mahajanatharv2009-design.github.io/ResumeAtharvMahajan/ link to portfolio",
     "category": "GitHub",
@@ -9,7 +21,7 @@ window.GITHUB_PROJECTS = [
     "url": "https://github.com/mahajanatharv2009-design/Resume_AtharvMahajan",
     "homepage": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
     "website": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
-    "updatedAt": "2026-07-07T00:09:18Z"
+    "updatedAt": "2026-07-07T00:46:24Z"
   },
   {
     "title": "Bday-card",
@@ -46,18 +58,6 @@ window.GITHUB_PROJECTS = [
     "homepage": "https://voca-blush.vercel.app",
     "website": "https://voca-blush.vercel.app",
     "updatedAt": "2026-07-06T23:46:28Z"
-  },
-  {
-    "title": "Happy New Year Prank Card",
-    "description": "This is a simple webpage that looks like a New Year's greeting. When opened, it preloads a hidden Rick Astley video.",
-    "category": "Web",
-    "pin": null,
-    "repo": "happy-new-year",
-    "owner": "Atharvamaj",
-    "url": "https://github.com/Atharvamaj/happy-new-year",
-    "homepage": "https://github.com/Atharvamaj/happy-new-year",
-    "website": "https://github.com/Atharvamaj/happy-new-year",
-    "updatedAt": "2026-07-06T23:43:07Z"
   },
   {
     "title": "VEXRobotics",
