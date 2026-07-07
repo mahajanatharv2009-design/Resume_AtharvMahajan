@@ -1,5 +1,5 @@
 {
-  "enabled": false,
+  "enabled": true,
   "owners": [
     "Atharvamaj",
     "mahajanatharv2009-design"
@@ -21,10 +21,10 @@
   "titleOverrides": {},
   "descriptionOverrides": {},
   "manualControl": "Use GitHub Actions > Sync GitHub Projects > Run workflow > bot_action: stop_bot/start_bot/sync_once/reset_projects/status_only",
-  "lastManualAction": "reset_projects",
+  "lastManualAction": "start_bot",
   "defaultCategory": "GitHub",
   "categoryOverrides": {},
   "websiteOverrides": {},
   "pinOverrides": {},
-  "lastManualActionAt": "2026-07-06T23:56:26.464Z"
+  "lastManualActionAt": "2026-07-07T00:09:14.487Z"
 }
