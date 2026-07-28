@@ -1,5 +1,17 @@
 window.GITHUB_PROJECTS = [
   {
+    "title": "Runner UP",
+    "description": "A alarm clock that run away from you.",
+    "category": "Hardware",
+    "pin": null,
+    "repo": "Runner_UP",
+    "owner": "Atharvamaj",
+    "url": "https://github.com/Atharvamaj/Runner_UP",
+    "homepage": "",
+    "website": "",
+    "updatedAt": "2026-07-28T02:28:43Z"
+  },
+  {
     "title": "Happy New Year Prank Card",
     "description": "This is a simple webpage that looks like a New Year's greeting. When opened, it preloads a hidden Rick Astley video.",
     "category": "Web",
@@ -9,19 +21,31 @@ window.GITHUB_PROJECTS = [
     "url": "https://github.com/Atharvamaj/happy-new-year",
     "homepage": "https://atharvamaj.github.io/happy-new-year/",
     "website": "https://atharvamaj.github.io/happy-new-year/",
-    "updatedAt": "2026-07-07T00:52:15Z"
+    "updatedAt": "2026-07-28T02:26:39Z"
   },
   {
-    "title": "Resume AtharvMahajan",
-    "description": "https://mahajanatharv2009-design.github.io/ResumeAtharvMahajan/ link to portfolio",
+    "title": "VEXRobotics",
+    "description": "This will be our Teams up comming websit",
+    "category": "Web",
+    "pin": null,
+    "repo": "VEX_Robotics_Code_team-11230B",
+    "owner": "Atharvamaj",
+    "url": "https://github.com/Atharvamaj/VEX_Robotics_Code_team-11230B",
+    "homepage": "",
+    "website": "",
+    "updatedAt": "2026-07-28T02:26:38Z"
+  },
+  {
+    "title": "THE-SIDE-QUEST",
+    "description": "<img width=\"882\" height=\"266\" alt=\"image\" src=\"https://github.com/user-attachments/assets/de081e7c-c9ab-4d3b-ab91-7f76f46889e2\" /",
     "category": "GitHub",
     "pin": null,
-    "repo": "Resume_AtharvMahajan",
-    "owner": "mahajanatharv2009-design",
-    "url": "https://github.com/mahajanatharv2009-design/Resume_AtharvMahajan",
-    "homepage": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
-    "website": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
-    "updatedAt": "2026-07-07T00:46:24Z"
+    "repo": "THE-SIDE-QUEST",
+    "owner": "Atharvamaj",
+    "url": "https://github.com/Atharvamaj/THE-SIDE-QUEST",
+    "homepage": "",
+    "website": "",
+    "updatedAt": "2026-07-21T02:16:42Z"
   },
   {
     "title": "Bday-card",
@@ -33,7 +57,19 @@ window.GITHUB_PROJECTS = [
     "url": "https://github.com/mahajanatharv2009-design/Bday-card",
     "homepage": "https://mahajanatharv2009-design.github.io/Bday-card/",
     "website": "https://mahajanatharv2009-design.github.io/Bday-card/",
-    "updatedAt": "2026-07-06T23:53:57Z"
+    "updatedAt": "2026-07-09T15:57:21Z"
+  },
+  {
+    "title": "Resume AtharvMahajan",
+    "description": "https://mahajanatharv2009-design.github.io/ResumeAtharvMahajan/ link to portfolio",
+    "category": "GitHub",
+    "pin": null,
+    "repo": "Resume_AtharvMahajan",
+    "owner": "mahajanatharv2009-design",
+    "url": "https://github.com/mahajanatharv2009-design/Resume_AtharvMahajan",
+    "homepage": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
+    "website": "https://mahajanatharv2009-design.github.io/Resume_AtharvMahajan/",
+    "updatedAt": "2026-07-07T00:54:15Z"
   },
   {
     "title": "J.A.R.V.I.S.",
@@ -58,18 +94,6 @@ window.GITHUB_PROJECTS = [
     "homepage": "https://voca-blush.vercel.app",
     "website": "https://voca-blush.vercel.app",
     "updatedAt": "2026-07-06T23:46:28Z"
-  },
-  {
-    "title": "VEXRobotics",
-    "description": "This will be our Teams up comming websit",
-    "category": "Web",
-    "pin": null,
-    "repo": "VEX_Robotics_Code_team-11230B",
-    "owner": "Atharvamaj",
-    "url": "https://github.com/Atharvamaj/VEX_Robotics_Code_team-11230B",
-    "homepage": "",
-    "website": "",
-    "updatedAt": "2026-07-06T23:42:26Z"
   },
   {
     "title": "Timy Wimey",
