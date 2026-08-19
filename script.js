@@ -468,6 +468,10 @@ function applyProjectFilter(selected = "Featured") {
       show = card.dataset.featured === "true";
     } else if (selected === "all") {
       show = true;
+    } else if (selected === "GitHub") {
+      // The GitHub tab is a source filter: show every project synced by the bot,
+      // even when its project category is Web, Hardware, Assistant, etc.
+      show = card.dataset.source === "github" || card.classList.contains("github-card") || card.dataset.category === "GitHub";
     } else {
       show = card.dataset.category === selected;
     }
@@ -803,15 +807,17 @@ document.addEventListener("keydown", event => {
     return;
   }
 
-  const existing = new Set(
-    Array.from(holder.querySelectorAll(".project-card h3"))
-      .map(el => normalizeProjectName(el.textContent))
-  );
-
+  // Keep the GitHub view faithful to the bot output. De-duplicate only repeated
+  // scraped repositories, not manually-authored portfolio cards with similar titles.
+  const seenGithubRepos = new Set();
   const clean = projects
     .filter(project => {
-      const key = normalizeProjectName(project.title || project.repo || "");
-      return key && !existing.has(key);
+      const repoKey = normalizeProjectName(
+        project.url || `${project.owner || ""}/${project.repo || ""}` || project.title || ""
+      );
+      if (!repoKey || seenGithubRepos.has(repoKey)) return false;
+      seenGithubRepos.add(repoKey);
+      return true;
     })
     .sort((a, b) => {
       const pinA = cleanPin(a.pin) || 999;
@@ -840,7 +846,7 @@ document.addEventListener("keydown", event => {
 
       links.push(`<a class="repo-link" href="${url}" target="_blank" rel="noopener">View Repo</a>`);
 
-      return `<article class="project-card github-card${pin ? " pinned-card" : ""}" data-category="${escapeHtml(category)}" data-updated-at="${escapeHtml(project.updatedAt || "")}"${pin ? ` data-pin="${pin}"` : ""}>
+      return `<article class="project-card github-card${pin ? " pinned-card" : ""}" data-source="github" data-category="${escapeHtml(category)}" data-updated-at="${escapeHtml(project.updatedAt || "")}"${pin ? ` data-pin="${pin}"` : ""}>
         <div class="project-tag">${escapeHtml(category)}</div>
         <h3>${title}</h3>
         <p>${desc}</p>
